@@ -1,0 +1,56 @@
+import type { Lang } from "./types";
+
+export const dict = {
+  appName: { en: "CareThread", fr: "CareThread" },
+  tagline: {
+    en: "One health story. Every provider. Always connected.",
+    fr: "Un dossier de santé. Chaque médecin. Toujours connecté.",
+  },
+  oneLine: {
+    en: "The patient holds the record. The doctor scans a QR. The admin writes itself.",
+    fr: "Le patient détient le dossier. Le médecin scanne un QR. L'administratif s'écrit tout seul.",
+  },
+  getStarted: { en: "Get started", fr: "Commencer" },
+  forClinicians: { en: "I'm a clinician", fr: "Je suis clinicien·ne" },
+  patientView: { en: "Patient view", fr: "Vue patient" },
+  clinicianView: { en: "Clinician view", fr: "Vue clinicien" },
+  signInGoogle: { en: "Continue with Google", fr: "Continuer avec Google" },
+  signInApple: { en: "Continue with Apple", fr: "Continuer avec Apple" },
+  linkCard: { en: "Link your health card", fr: "Lier votre carte santé" },
+  ramq: { en: "RAMQ (Quebec)", fr: "RAMQ (Québec)" },
+  ohip: { en: "OHIP (Ontario)", fr: "OHIP (Ontario)" },
+  continue: { en: "Continue", fr: "Continuer" },
+  dailyNudge: { en: "Today's nudge", fr: "Rappel du jour" },
+  overview: { en: "Overview", fr: "Aperçu" },
+  timeline: { en: "My timeline", fr: "Mon parcours" },
+  screenings: { en: "Screening tracker", fr: "Dépistages" },
+  symptoms: { en: "Symptom watch", fr: "Symptômes à surveiller" },
+  share: { en: "Share my record", fr: "Partager mon dossier" },
+  reminders: { en: "Reminders", fr: "Rappels" },
+  ok: { en: "Up to date", fr: "À jour" },
+  due: { en: "Due soon", fr: "À prévoir" },
+  overdue: { en: "Overdue", fr: "En retard" },
+  showQr: { en: "Show QR to your doctor", fr: "Montrer le QR à votre médecin" },
+  qrExpires: { en: "Expires in 24 hours", fr: "Expire dans 24 heures" },
+  accessLog: { en: "Access log", fr: "Journal d'accès" },
+  noAccessYet: { en: "No one has accessed your record yet.", fr: "Personne n'a encore consulté votre dossier." },
+  simulateScan: { en: "Simulate doctor scan", fr: "Simuler la lecture du QR" },
+  patientSummary: { en: "Patient summary", fr: "Résumé patient" },
+  preVisitFlags: { en: "Pre-visit flags", fr: "Signalements pré-visite" },
+  addFollowUp: { en: "Add follow-up", fr: "Ajouter un suivi" },
+  draftReferral: { en: "Draft referral", fr: "Rédiger une référence" },
+  adminTools: { en: "Admin tools", fr: "Outils administratifs" },
+  conditions: { en: "Conditions", fr: "Conditions" },
+  medications: { en: "Medications", fr: "Médicaments" },
+  allergies: { en: "Allergies", fr: "Allergies" },
+  providerNumber: { en: "Provider number", fr: "Numéro de praticien" },
+  enterToView: { en: "Enter your provider number to view this record.", fr: "Entrez votre numéro pour voir ce dossier." },
+  unlock: { en: "Unlock record", fr: "Déverrouiller" },
+  whyText: {
+    en: "Built because health stories get lost between walk-in visits — and people pay the price.",
+    fr: "Conçu parce que les histoires de santé se perdent entre les visites — et les gens en paient le prix.",
+  },
+};
+
+export type DictKey = keyof typeof dict;
+export const t = (k: DictKey, lang: Lang) => dict[k][lang];

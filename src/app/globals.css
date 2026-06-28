@@ -1,26 +1,180 @@
 @import "tailwindcss";
+@import "tw-animate-css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * CareThread design system
+ * Palette: warm clinical — bone cream, deep forest, mossy sage, copper warning, signal red
+ * Type: Fraunces (display, serifed for trust) + Inter (UI)
+ * Motif: thick left-rail accents + soft cards on cream, never generic clinical blue
+ */
 
 @theme inline {
+  --font-display: var(--font-fraunces);
+  --font-sans: var(--font-inter);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-sage: var(--sage);
+  --color-sage-foreground: var(--sage-foreground);
+  --color-copper: var(--copper);
+  --color-copper-foreground: var(--copper-foreground);
+  --color-signal: var(--signal);
+  --color-signal-foreground: var(--signal-foreground);
+  --color-bone: var(--bone);
+  --color-ink: var(--ink);
+
+  --shadow-card: 0 1px 0 oklch(0.2 0.03 160 / 0.04), 0 6px 24px -12px oklch(0.2 0.03 160 / 0.18);
+  --shadow-lift: 0 2px 0 oklch(0.2 0.03 160 / 0.06), 0 18px 40px -20px oklch(0.2 0.03 160 / 0.28);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+:root {
+  --radius: 0.875rem;
+
+  /* Surfaces */
+  --bone: oklch(0.975 0.012 90);
+  --background: oklch(0.975 0.012 90);
+  --foreground: oklch(0.22 0.03 160);
+  --ink: oklch(0.18 0.025 165);
+
+  --card: oklch(0.995 0.006 95);
+  --card-foreground: oklch(0.22 0.03 160);
+  --popover: oklch(0.995 0.006 95);
+  --popover-foreground: oklch(0.22 0.03 160);
+
+  /* Primary — deep forest, evokes Canadian boreal, never generic blue */
+  --primary: oklch(0.32 0.06 162);
+  --primary-foreground: oklch(0.975 0.012 90);
+
+  /* Secondary — mossy sage */
+  --secondary: oklch(0.88 0.04 150);
+  --secondary-foreground: oklch(0.25 0.05 162);
+
+  --muted: oklch(0.93 0.015 100);
+  --muted-foreground: oklch(0.46 0.02 160);
+
+  --accent: oklch(0.92 0.05 150);
+  --accent-foreground: oklch(0.25 0.05 162);
+
+  /* Sage — calm OK status */
+  --sage: oklch(0.78 0.09 155);
+  --sage-foreground: oklch(0.22 0.06 162);
+
+  /* Copper — amber warning, warmer than yellow */
+  --copper: oklch(0.74 0.13 60);
+  --copper-foreground: oklch(0.22 0.05 50);
+
+  /* Signal — overdue red, muted brick (not screaming) */
+  --signal: oklch(0.58 0.17 22);
+  --signal-foreground: oklch(0.985 0.01 90);
+
+  --destructive: oklch(0.58 0.2 25);
+  --destructive-foreground: oklch(0.985 0.01 90);
+
+  --border: oklch(0.88 0.012 120);
+  --input: oklch(0.88 0.012 120);
+  --ring: oklch(0.32 0.06 162);
+}
+
+.dark {
+  --background: oklch(0.18 0.02 162);
+  --foreground: oklch(0.96 0.012 90);
+  --card: oklch(0.22 0.025 162);
+  --card-foreground: oklch(0.96 0.012 90);
+  --popover: oklch(0.22 0.025 162);
+  --popover-foreground: oklch(0.96 0.012 90);
+  --primary: oklch(0.85 0.09 150);
+  --primary-foreground: oklch(0.2 0.04 162);
+  --secondary: oklch(0.3 0.04 162);
+  --secondary-foreground: oklch(0.96 0.012 90);
+  --muted: oklch(0.28 0.025 162);
+  --muted-foreground: oklch(0.72 0.02 140);
+  --accent: oklch(0.3 0.05 150);
+  --accent-foreground: oklch(0.96 0.012 90);
+  --border: oklch(1 0 0 / 12%);
+  --input: oklch(1 0 0 / 14%);
+  --ring: oklch(0.78 0.09 155);
+}
+
+@layer base {
+  * { border-color: var(--color-border); }
+  html { font-family: var(--font-sans); }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-feature-settings: "ss01", "cv11";
+    -webkit-font-smoothing: antialiased;
+    background-image:
+      radial-gradient(1200px 600px at 90% -10%, oklch(0.88 0.05 150 / 0.5), transparent 60%),
+      radial-gradient(900px 500px at -10% 110%, oklch(0.84 0.07 60 / 0.25), transparent 60%);
+    background-attachment: fixed;
+  }
+  h1, h2, h3, .font-display {
+    font-family: var(--font-display);
+    font-feature-settings: "ss01";
+    letter-spacing: -0.02em;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  .ct-card {
+    background-color: var(--color-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-2xl);
+    box-shadow: var(--shadow-card);
+  }
+  .ct-rail {
+    position: relative;
+    overflow: hidden;
+  }
+  .ct-rail::before {
+    content: "";
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 6px;
+    background: var(--rail-color, var(--color-primary));
+  }
+  .ct-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.25rem 0.625rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+  .ct-grid-bg {
+    background-image:
+      linear-gradient(to right, oklch(0.32 0.06 162 / 0.06) 1px, transparent 1px),
+      linear-gradient(to bottom, oklch(0.32 0.06 162 / 0.06) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
 }
