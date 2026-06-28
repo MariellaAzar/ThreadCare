@@ -21,6 +21,13 @@ const Input = z.object({
 });
 
 export async function POST(request: NextRequest) {
+  if (!process.env.ANTHROPIC_API_KEY) {
+    return NextResponse.json(
+      { error: "AI referral drafting is not configured. Add an ANTHROPIC_API_KEY to your environment variables." },
+      { status: 503 },
+    );
+  }
+
   try {
     const body = await request.json();
     const data = Input.parse(body);

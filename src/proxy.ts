@@ -1,17 +1,14 @@
-import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
+import { NextRequest, NextResponse } from "next/server";
 
-// /patient and its sub-paths require a Clerk session
-const isProtected = createRouteMatcher(["/patient(.*)"]);
-
-export default clerkMiddleware(async (auth, req) => {
-  if (isProtected(req)) {
-    await auth.protect();
-  }
-});
+// Demo mode — no Clerk keys configured, all routes pass through.
+// To enable auth: add NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY + CLERK_SECRET_KEY
+// to Vercel environment variables, then swap this file for the Clerk version.
+export default function proxy(_req: NextRequest) {
+  return NextResponse.next();
+}
 
 export const config = {
   matcher: [
-    // Skip Next.js internals and static files
     "/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)",
     "/(api|trpc)(.*)",
   ],

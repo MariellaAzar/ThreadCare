@@ -313,7 +313,10 @@ function ReferralCard({
           lang,
         }),
       });
-      if (!res.ok) throw new Error(await res.text());
+      if (!res.ok) {
+        const body = await res.json().catch(() => ({}));
+        throw new Error(body.error || "Failed to generate referral");
+      }
       const data = await res.json();
       setLetter(data.letter);
     } catch (e) {
